@@ -10,17 +10,13 @@ RUN pip install --install-option="--prefix=/install" -r /tmp/requirements.txt
 
 
 
-FROM python:3.7-slim as test
-
-COPY --from=base /install /usr/local
-
-RUN mkdir /reports
+FROM base as unittests
 
 COPY src /app
 
-RUN pytest --junit-xml=/reports
+RUN mkdir /reports
 
-# publish or collect the results 
+RUN pytest --junit-xml=/reports/unit.xml
 
 
 
