@@ -4,8 +4,6 @@ COPY requirements.txt /tmp/requirements.txt
 
 RUN mkdir /install
 
-WORKDIR /install
-
 RUN pip install --install-option="--prefix=/install" -r /tmp/requirements.txt
 
 
