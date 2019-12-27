@@ -4,7 +4,7 @@ COPY requirements.txt /tmp/requirements.txt
 
 RUN mkdir /install
 
-RUN pip install --install-option="--prefix=/install" -r /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt
 
 
 
@@ -14,19 +14,21 @@ COPY src /app
 
 RUN mkdir /reports
 
-RUN pytest --junit-xml=/reports/unit.xml
+WORKDIR /app
+
+RUN pytest test-pass.py --junit-xml=/reports/unit.xml
 
 
 
 FROM python:3.7-slim as production
 
-COPY --from=base /install /usr/local
+COPY --from=base /usr/local /usr/local
 
 RUN useradd --create-home appuser
 
 USER appuser
 
-COPY --from=test /app /home/appuser/app
+COPY --from=unittests /app /home/appuser/app
 
 WORKDIR /home/appuser/app
 
