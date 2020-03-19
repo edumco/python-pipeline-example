@@ -34,40 +34,7 @@ The PyTest configuration is used to define the root folder for the tests and to 
 
 ### Requirements file 📃
 
-The requirements file lists all the project dependencies. This allows the pip (Python package manager) to download the correct versions of wich dependency.
-
-Its very important to pin the exact version when creating a container image.
-
-    5.3.5 instead of 5.3
-
-If some dependency is updated pip will use the latest version within the limits you choose when describing the version:
-
-Ex: Imagine a dependency that is on version 8.0
-
-| Dependency  | Pip undertanding           | Result |
-| ----------- | -------------------------- | ------ |
-| name        | latest version             | 8.0    |
-| name==5     | latest version ≧ 5.0 < 6.0 | 5.9.9  |
-| name==5.3   | latest version ≧ 5.3 < 6.0 | 5.9.9  |
-| name==5.3.5 | exact version              | 5.3.5  |
-
-Not all projects uses this aproach, so if you use a dependency A and it other dependencies without fixing the version you'll still not getting a reproducible image.
-
-To fix this problem you can freeze your dependencies so you'll always get the same results. In the root of your project use the command:
-
-    pip freeze > requirements.txt
-
-This will print the exact versions of every pip package in a file that will look like this:
-
-```python
-asn1crypto==0.24.0
-chardet==3.0.4
-configparser==3.5.0b2
-cryptography==2.6.1
-...
-```
-
-Now you have total control over the packages that will be instaled on your container.
+The requirements file lists all the project dependencies. This allows the pip (Python package manager) to download the correct versions of wich dependency. [See the dependencies stage to more details.](pipeline/dependencies.md)
 
 ### Dockerfile 🐳
 
