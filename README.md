@@ -25,8 +25,7 @@ When the PyTest framework execute it will find the test by the name test\*.py
 
 ### Pytest configuration 💻
 
-?????????????
-The PyTest configuration only set the behavio used by Pytest as an classic version of Junit
+The PyTest configuration is used to define the root folder for the tests and to add options to PyTest. In this example it is used to disable a warning message when used with JUnit.
 
 ### Requirements file 📃
 
