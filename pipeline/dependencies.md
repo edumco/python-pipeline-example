@@ -29,7 +29,8 @@ Imagine a project that depends on "external-package" in version 3.2.1, its requi
 
 But if we look at this package requirements we find
 
-    ...your
+    ...
+    six
 
 This depency will change everytime pip finds a newer version greater than 0.8. By now this package is already on version 1.14 but you developed and tested your project on version 1.12 and cannot risk jump to the latest version now.
 
