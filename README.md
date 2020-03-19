@@ -8,12 +8,17 @@ Although several pipeline solutions exist, they are too complex for small projec
 
 You can put several stages to your pipeline:
 
-- Code formatter
-- Code lint
-- Static analisys
-- Unit test
-- Report Publishing
-- Automatic tag generation
+- [Dependencies](pipeline/dependencies.md)
+
+- [Tests](pipeline/tests.md)
+
+- [Code lint](pipeline/lint.md)
+
+- [Static analisys](pipeline/static-analisys.md)
+
+- [Report Publishing](pipeline/reports.md)
+
+- [Automatic tag generation](pipeline/tagging.md)
 
 In this repo i've add a very basic python project with only four elements: a requirements file, a Dockerfile, a pytest.ini file and a simple python test that always pass.
 
