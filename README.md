@@ -42,7 +42,7 @@ The Dockerfile uses the multistage build feature to create the pipeline. Each st
 
 You can put a lint image and analize the code and on the next stage publish the results using another image. The previous image is completed descarted and does not interfere in the final production image. See the example below:
 
-    from cytopia/docker-pylint:latest as linter
+    FROM cytopia/docker-pylint:latest as linter
 
     COPY  src /data
 
@@ -50,7 +50,7 @@ You can put a lint image and analize the code and on the next stage publish the 
 
     ...
 
-    from python:3.8-slim as production
+    FROM python:3.8-slim as production
 
     COPY  src /app
 
