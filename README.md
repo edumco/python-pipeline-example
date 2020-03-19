@@ -69,7 +69,27 @@ Now you have total control over the packages that will be instaled on your conta
 
 The Dockerfile uses the multistage build feature to create the pipeline. Each stage can be executed by a diferent image and only the output artifacts will be reused.
 
-You can put a lint image and analize the code and on the next stage publish the results using another image. The previous image is completed descarted and does not interfere in the final production image.
+You can put a lint image and analize the code and on the next stage publish the results using another image. The previous image is completed descarted and does not interfere in the final production image. See the example below:
+
+    from cytopia/docker-pylint:latest as linter
+
+    COPY  src /data
+
+    RUN pylint /data
+
+    ...
+
+    from python:3.8-slim as production
+
+    COPY  src /app
+
+    USER app
+
+    CMD["python", "/app/start.py"]
+
+In this Dockerfile we are using two images. The lint image and a python for production. The images are both used to create containers but only the last image will be used to create the final image.
+
+You can use multiples images to create a more complex pipeline and every time you build the image youll have a new valid version.
 
 If any stage of the build fails (test fail, instalation fails...) the entire build will fail and you have to fix it before continue. So if your image has a successful build it means that it passes all stages.
 
