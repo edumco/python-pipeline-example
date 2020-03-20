@@ -51,6 +51,36 @@ six==1.12.0
 
 Now you have total control over the packages that will be instaled on your container. You have a version that is greater than 0.8 so "external-package" depency is respected without the risk of a imcompatibility issue.
 
+## Depencies cache on Docker
+
+You can use the multistage to cache the requirements manking your build much more faster.
+
+First you just need to discover the installation folder and give a name for this stage:
+
+    FROM python:3.7-slim as requirements
+
+    COPY requirements.txt /tmp/requirements.txt
+
+    RUN pip install -r /tmp/requirements.txt
+
+And then reuse this folder extending the image or copying the folder:
+
+Extending the image
+
+    FROM requirements
+
+    ...
+
+Copying the instalation folder
+
+    FROM ubuntu:18.04
+
+    COPY --from=requirements  /usr/local /usr/local
+
+    ...
+
+This way you can youse the best operational system for every task and your repositories will be reused throughout the pipeline.
+
 ## Updating the versions
 
 There are several services that alerts you of an update and even trigger your CI by applying a pull request updating your depencies, if all your tests passes you can upgrade the depencies more safely and keep your project more secure.
