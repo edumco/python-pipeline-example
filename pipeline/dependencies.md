@@ -4,12 +4,13 @@
 
 Its very important to pin the exact version when creating a container image.
 
-    5.3.5 instead of 5.3
+```python
+Ex: 5.3.5 instead of 5.3
+```
 
 Otherwise when some dependency got updated pip will update your project ands this cause troubles that are hard to find.
 
-Pip always uses the latest version within the limits you choose when describing the version:
-
+Pip always uses pythonbuild
 Ex: Imagine a dependency that is on version 8.0
 
 | Dependency  | Pip undertanding           | Result |
@@ -19,28 +20,32 @@ Ex: Imagine a dependency that is on version 8.0
 | name==5.3   | latest version ≧ 5.3 < 6.0 | 5.9.9  |
 | name==5.3.5 | exact version              | 5.3.5  |
 
-## Fixing dependency tree 📌
-
 If you use a dependency that dont fix its dependencies you'll still not getting a reproducible image.
 
-Imagine a project that depends on "external-package" in version 3.2.1, its requirements would be like:
+Imagine a project that depends on "external-package" in version 3.2.1, its requirements would be likef this rule, use a consistent style (either indenting or code fences).:
 
-    external-package==3.2.1
+```python
+external-package==3.2.1
+```
 
 But if we look at this package requirements we find
 
-    ...
-    six ≧ 0.8
+```python
+...
+six ≧ 0.8
+```
 
-This depency will change everytime pip finds a newer version greater than 0.8. By now this package is already on version 1.14 but you developed and tested your project on version 1.12 and cannot risk jump to the latest version now.
+This depency will change ef this rule, use a consistent style (either indenting or code fences).ion 1.14 but you developed and tested your project on version 1.12 and cannot risk jump to the latest version now.
 
 To fix this probyourlem you can freeze your dependency tree so you'll always get the same results. In the root of your project use the command:
 
-    pip freeze > requirements.txt
+```sh
+pip freeze > requirements.txt
+```
 
 This will print the exact versions of every pip package in a file that will look like this:
 
-```pythonbuild
+```python
 asn1crypto==0.24.0
 chardet==3.0.4
 configparser==3.5.0b2
@@ -57,25 +62,26 @@ You can use the multistage to cache the requirements manking your build much mor
 
 First you just need to discover the installation folder and give a name for this stage:
 
-    FROM python:3.7-slim as requirements
+```dockerfile
+FROM python:3.7-slim as requirements
 
-    COPY requirements.txt /tmp/requirements.txt
+COPY requirements.txt /tmp/requirements.txt
 
-    RUN pip install -r /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt
 
 And then reuse this folder extending the image or copying the folder:
 
 Extending the image
 
-    FROM requirements
+FROM requirements
 
-    ...build
 
-    FROM ubuntu:18.04
+FROM ubuntu:18.04
 
-    COPY --from=requirements  /usr/local /usr/local
+COPY --from=requirements  /usr/local /usr/local
 
-    ...
+...
+```
 
 This way you can youse the best operational system for every task and your repositories will be reused throughout the pipeline.
 
@@ -86,35 +92,47 @@ There are several services that alerts you of an update and even trigger your CI
 Using a CI on docker build you can also do the same. You just have to isolate the upgrades by testing and publishing a new image for every upgrade.
 build
 
-    pip list --outdated
+```sh
+pip list --outdated
+```
 
 Resulting in a list like this:
 
-    Package      Version Latest Type
-    ------------ ------- ------ -----
-    asn1crypto   0.24.0  1.3.0  wheel
-    configparser 3.5.0b2 4.0.2  wheel
-    cryptography 2.6.1   2.8    wheel
-    dbus-python  1.2.12  1.2.16 sdist
-    six          1.12.0  1.14.0 wheel
+```python
+Package      Version Latest Type
+------------ ------- ------ -----
+asn1crypto   0.24.0  1.3.0  wheel
+configparser 3.5.0b2 4.0.2  wheel
+cryptography 2.6.1   2.8    wheel
+dbus-python  1.2.12  1.2.16 sdist
+six          1.12.0  1.14.0 wheel
+```
 
 So for every item on this list you have to:
 
 Upgrade the item
 
-    pip install --upgrade NAME_OF_PACKAGE
+```sh
+pip install --upgrade NAME_OF_PACKAGE
+```
 
 Freeze the requirements
 
-    pip freeze > requirements.txt
+```sh
+pip freeze > requirements.txt
+```
 
 Test your build
 
-    docker build my-dockerhub-user/my-project:$(VERSION)
+```sh
+docker build my-dockerhub-user/my-project:$(VERSION)
+```
 
 Publish a new image version.
 
-    docker push my-dockerhub-user/my-project:$(VERSION)
+```sh
+docker push my-dockerhub-user/my-project:$(VERSION)
+```
 
 ## Upgrading the pip itself 💻
 
