@@ -1,6 +1,6 @@
-# Dependencies
+# Building the Dependency Tree 🌲
 
-## Choose the version
+## Choosing the versions 🔍
 
 Its very important to pin the exact version when creating a container image.
 
@@ -19,7 +19,7 @@ Ex: Imagine a dependency that is on version 8.0
 | name==5.3   | latest version ≧ 5.3 < 6.0 | 5.9.9  |
 | name==5.3.5 | exact version              | 5.3.5  |
 
-## Fixing dependency tree
+## Fixing dependency tree 📌
 
 If you use a dependency that dont fix its dependencies you'll still not getting a reproducible image.
 
@@ -40,7 +40,7 @@ To fix this probyourlem you can freeze your dependency tree so you'll always get
 
 This will print the exact versions of every pip package in a file that will look like this:
 
-```python
+```pythonbuild
 asn1crypto==0.24.0
 chardet==3.0.4
 configparser==3.5.0b2
@@ -51,7 +51,7 @@ six==1.12.0
 
 Now you have total control over the packages that will be instaled on your container. You have a version that is greater than 0.8 so "external-package" depency is respected without the risk of a imcompatibility issue.
 
-## Depencies cache on Docker
+## Dependencies cache on Docker 📦
 
 You can use the multistage to cache the requirements manking your build much more faster.
 
@@ -69,9 +69,7 @@ Extending the image
 
     FROM requirements
 
-    ...
-
-Copying the instalation folder
+    ...build
 
     FROM ubuntu:18.04
 
@@ -81,13 +79,12 @@ Copying the instalation folder
 
 This way you can youse the best operational system for every task and your repositories will be reused throughout the pipeline.
 
-## Updating the versions
+## Updating the versions 📩
 
 There are several services that alerts you of an update and even trigger your CI by applying a pull request updating your depencies, if all your tests passes you can upgrade the depencies more safely and keep your project more secure.
 
 Using a CI on docker build you can also do the same. You just have to isolate the upgrades by testing and publishing a new image for every upgrade.
-
-To see wich dependencies were updated you can use the following command:
+build
 
     pip list --outdated
 
@@ -119,6 +116,6 @@ Publish a new image version.
 
     docker push my-dockerhub-user/my-project:$(VERSION)
 
-## Upgrading the pip itself
+## Upgrading the pip itself 💻
 
 From time to time the pip gets updated and this can affect your dependency tree resolution. Verify the release notes before update your enviroment.
