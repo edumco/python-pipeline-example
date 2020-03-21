@@ -1,21 +1,33 @@
 # Lint
 
-You can put a lint image and analize the code and on the next stage publish the results using another image. The previous image is completed descarted and does not interfere in the final production image. See the example below:
+## Choosing the rules
 
-    FROM cytopia/docker-pylint:latest as linter
+There are several sets of linting rules for every program language. For Python theese rules are defiened in a document [called PEP8](https://pep8.org/).
 
-    COPY  src /data
+The more rules better results, so a good start point is the Pylama package that combines several linters together.
 
-    RUN pylint /data
+To understand python linterd I suggest you to read the article:
 
-    ...
+[Python Code Quality: Tools & Best Practices](https://realpython.com/python-code-quality/#style-guides)
 
-    FROM python:3.8-slim as production
+See the example below:
 
-    COPY  src /app
+```dockerfile
+FROM cytopia/docker-pylint:latest as linter
 
-    USER app
+COPY  s  rc /data
 
-    CMD["python", "/app/start.py"]
+RUN pylint /data
+
+...
+
+FROM python:3.8-slim as production
+
+COPY  src /app
+
+USER app
+
+CMD["python", "/app/start.py"]
+```
 
 In this Dockerfile we are using two images. The lint image and a python for production. The images are both used to create containers but only the last image will be used to create the final image.
