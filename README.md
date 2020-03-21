@@ -33,16 +33,44 @@ The Dockerfile uses the multistage build feature to create the pipeline. Each st
 
 ## The pipeline stages
 
-You can put several stages to your pipeline:
+You can put several stages to your pipeline, but the most common stages are:
 
-- [Dependencies](pipeline/dependencies.md)
+| 1     | 2    | 3    | 4        | 5      | 6   |
+| ----- | ---- | ---- | -------- | ------ | --- |
+| Build | Test | Lint | Analisys | Report | Tag |
 
-- [Static analisys](pipeline/static-analisys.md)
+### Build
 
-- [Tests](pipeline/tests.md)
+Python does not have a build stage but has a pre-execution stage of build the dependency tree by download packages and resolving sub dependencies.
 
-- [Code lint](pipeline/lint.md)
+[🔗 Access the "Building the Dependency Tree" tutorial 🔗](pipeline/dependencies.md)
 
-- [Report Publishing](pipeline/reports.md)
+### Test
 
-- [Automatic tag generation](pipeline/tagging.md)
+After gather all the packages now we can test our application. The most common type of tests is the unit test but to achieve a good code quality we should add other types of test as well.
+
+[Access the Test tutorial 🔗](pipeline/tests.md)
+
+### Lint
+
+When the tests are passing is time to check the code checking if guidelines for the code style are being followed. A consistent code style helps with readability and mantainece.
+
+- [🔗 Access the Lint tutorial 🔗](pipeline/lint.md)
+
+### Analisys
+
+With a consistent code base its easier to find code patterns that could lead to errors or make your code prone to atacks. Another advantage is the complexity management.
+
+- [🔗 Access the Static Analisys tutorial 🔗](pipeline/static-analisys.md)
+
+### Report
+
+With all quality checks done it is necessary to comunicate the results. Its possible to send a message to external tools notifying the complete result.
+
+- [🔗 Access the Report tutorial 🔗](pipeline/reports.md)
+
+### Tag
+
+Now that all the steps complete we can define that this build is production ready and should receive a tag with its version number using some of the common tag practicies used world-wide.
+
+- [🔗 Access the Tag tutorial 🔗](pipeline/tagging.md)
