@@ -13,11 +13,11 @@ Although several pipeline solutions exist, they are too complex for small projec
 
 In this repo i've add a very basic python project with only four elements: a requirements file, a Dockerfile, a pytest.ini file and a simple python test that always pass.
 
-#### 1. Requirements file 📃
+#### Requirements file 📃
 
-The requirements file lists all the project dependencies. This allows the pip (Python package manager) to download the correct versions of wich dependency. [See the dependencies stage to more details.](pipeline/dependencies.md)
+The requirements file lists all the project dependencies. This allows the pip (Python package manager) to download the correct versions of wich dependency. [See the dependencies tutorial to more details.](pipeline/dependencies.md)
 
-#### 2. Sample test ✅
+#### Sample test ✅
 
 Our project does not have a software but we need at least a single test to prove that our test library is working, so we add a simple function with the name test-pass.py.
 
@@ -43,34 +43,34 @@ You can put several stages to your pipeline, but the most common stages are:
 
 Python does not have a build stage but has a pre-execution stage of build the dependency tree by download packages and resolving sub dependencies.
 
-[🔗 Access the "Building the Dependency Tree" tutorial 🔗](pipeline/dependencies.md)
+[Access the "Building the Dependency Tree" tutorial](pipeline/dependencies.md)
 
 ### Test
 
 After gather all the packages now we can test our application. The most common type of tests is the unit test but to achieve a good code quality we should add other types of test as well.
 
-[Access the Test tutorial 🔗](pipeline/tests.md)
+[Access the "Testing with PyTest" tutorial](pipeline/tests.md)
 
 ### Lint
 
 When the tests are passing is time to check the code checking if guidelines for the code style are being followed. A consistent code style helps with readability and mantainece.
 
-- [🔗 Access the Lint tutorial 🔗](pipeline/lint.md)
+- [Access the Lint tutorial](pipeline/lint.md)
 
 ### Analisys
 
 With a consistent code base its easier to find code patterns that could lead to errors or make your code prone to atacks. Another advantage is the complexity management.
 
-- [🔗 Access the Static Analisys tutorial 🔗](pipeline/static-analisys.md)
+- [Access the Static Analisys tutorial](pipeline/static-analisys.md)
 
 ### Report
 
 With all quality checks done it is necessary to comunicate the results. Its possible to send a message to external tools notifying the complete result.
 
-- [🔗 Access the Report tutorial 🔗](pipeline/reports.md)
+- [Access the Report tutorial](pipeline/reports.md)
 
 ### Tag
 
 Now that all the steps complete we can define that this build is production ready and should receive a tag with its version number using some of the common tag practicies used world-wide.
 
-- [🔗 Access the Tag tutorial 🔗](pipeline/tagging.md)
+- [Access the Tag tutorial](pipeline/tagging.md)
