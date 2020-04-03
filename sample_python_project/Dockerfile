@@ -1,19 +1,26 @@
 FROM python:3.7-slim as requirements
 
-COPY requirements.txt /tmp/requirements.txt
+COPY requirements.txt /app/requirements.txt
 
-RUN pip install -r /tmp/requirements.txt
+RUN pip install -r /app/requirements.txt
 
 
-FROM requirements as unittests
+FROM requirements as code
 
 COPY src /app
 
-RUN mkdir /reports
-
 WORKDIR /app
 
-RUN pytest test-pass.py --junit-xml=/reports/unit.xml
+
+FROM code as test
+
+COPY requirements-test.txt /app/requirements-test.txt
+
+RUN  pip install -r /app/requirements-test.txt
+
+RUN mkdir /reports
+
+RUN pytest --junit-xml=/reports/unit.xml
 
 
 FROM python:3.7-slim as production
@@ -24,6 +31,6 @@ USER appuser
 
 COPY --from=requirements /usr/local /usr/local
 
-COPY --from=unittests /app /home/appuser/app
+COPY --from=code /app /home/appuser/app
 
 WORKDIR /home/appuser/app
