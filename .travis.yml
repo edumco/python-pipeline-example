@@ -10,10 +10,10 @@ python:
   - "3.8.2"
 
 install:
-  - pip install -r requirements.txt
-  - pip install -r requirements-test.txt
+  - pip install -r sample_python_project/requirements.txt
+  - pip install -r sample_python_project/requirements-test.txt
 
 jobs:
   fast_finish: true
 
-script: pytest
+script: cd sample_python_project && pytest
