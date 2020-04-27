@@ -3,35 +3,15 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/edumco/python-pipeline-example)
 
-Simple example of a pipeline on Docker to test your python code.
+Simple Docker pipeline to test your python code.
 
-## Pipeline on a container
+## About
 
 Although several pipeline solutions exist, they are too complex for small projects. With this solution you just need a Dockerfile.
 
-### Implementation
+## Features
 
 In this repo i've add a very basic python project with only four elements: a requirements file, a Dockerfile, a pytest.ini file and a simple python test that always pass.
-
-#### Requirements file 📃
-
-The requirements file lists all the project dependencies. This allows the pip (Python package manager) to download the correct versions of wich dependency. [See the dependencies tutorial to more details.](pipeline/dependencies.md)
-
-#### Sample test ✅
-
-Our project does not have a software but we need at least a single test to prove that our test library is working, so we add a simple function with the name test-pass.py.
-
-When the PyTest framework execute it will find the test by the name test\*.py
-
-#### Pytest configuration 💻
-
-The PyTest configuration is used to define the root folder for the tests and to add options to PyTest. In this example it is used to disable a warning message when used with JUnit.
-
-#### Dockerfile 🐳
-
-The Dockerfile uses the multistage build feature to create the pipeline. Each stage can be executed by a diferent image and only the output artifacts will be reused.
-
-## The pipeline stages
 
 You can put several stages to your pipeline, but the most common stages are:
 
@@ -39,38 +19,48 @@ You can put several stages to your pipeline, but the most common stages are:
 | ----- | ---- | ---- | -------- | ------ | --- |
 | Build | Test | Lint | Analisys | Report | Tag |
 
-### Build
+## The pipeline stages
 
-Python does not have a build stage but has a pre-execution stage of build the dependency tree by download packages and resolving sub dependencies.
+[Build](pipeline/dependencies.md): Downloads and build dependencies.
 
-[Access the "Building the Dependency Tree" tutorial](pipeline/dependencies.md)
+[Test](pipeline/tests.md): Executes all tests found.
 
-### Test
+[Lint](pipeline/lint.md): Checks code style and format.
 
-After gather all the packages now we can test our application. The most common type of tests is the unit test but to achieve a good code quality we should add other types of test as well.
+[Analisys](pipeline/static-analisys.md): Checks for bad code practicies.
 
-[Access the "Testing with PyTest" tutorial](pipeline/tests.md)
+[Report](pipeline/reports.md): Exports the results to archiving.
 
-### Lint
+[Tag](pipeline/tagging.md): Adds a unique identifier to the version.
 
-When the tests are passing is time to check the code checking if guidelines for the code style are being followed. A consistent code style helps with readability and mantainece.
+## Installation
 
-- [Access the Lint tutorial](pipeline/lint.md)
+1. Clone or download this repository.
 
-### Analisys
+2. Move your code to this new structure or vice versa.
 
-With a consistent code base its easier to find code patterns that could lead to errors or make your code prone to atacks. Another advantage is the complexity management.
+3. Make sure the `Dockerfile` is on project root folder.
 
-- [Access the Static Analisys tutorial](pipeline/static-analisys.md)
+4. Update the requiments with your dependencies or create your list of requirements. [See the dependencies tutorial to more details.](pipeline/dependencies.md)
 
-### Report
+5. Make sure the name patterns on `pytest.ini`
 
-With all quality checks done it is necessary to comunicate the results. Its possible to send a message to external tools notifying the complete result.
+6. Make sure you have at least one passing test (there's one in test-pass.py)
 
-- [Access the Report tutorial](pipeline/reports.md)
+7. In `Dockerfile` rename the `src` folder following your project organizaziton.
 
-### Tag
+## Usage
 
-Now that all the steps complete we can define that this build is production ready and should receive a tag with its version number using some of the common tag practicies used world-wide.
+Execute the docker build command
 
-- [Access the Tag tutorial](pipeline/tagging.md)
+```bash
+docker build -t your-docker-user/projetc-name:tag .
+```
+
+If every step works correctly the command `docker images` is going to list your newly created image.
+
+If something goes wrong youll be promptly warned.
+
+## License
+
+[GNU General Public License v3.0](LICENSE)
