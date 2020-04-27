@@ -1,7 +1,9 @@
 # Python Pipeline Example 🐍
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Build Status](https://travis-ci.com/edumco/python-pipeline-example.svg?branch=master)](https://travis-ci.com/edumco/python-pipeline-example)
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/edumco/python-pipeline-example)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4c67f0e9fbd14497be3a2aaca064a6dc)](https://www.codacy.com/manual/edumco/python-pipeline-example?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=edumco/python-pipeline-example&amp;utm_campaign=Badge_Grade)
 
 Simple Docker pipeline to test your python code.
 
