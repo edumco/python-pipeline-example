@@ -21,8 +21,6 @@ You can put several stages to your pipeline, but the most common stages are:
 | ----- | ---- | ---- | -------- | ------ | --- |
 | Build | Test | Lint | Analisys | Report | Tag |
 
-## The pipeline stages
-
 [Build](pipeline/dependencies.md): Downloads and build dependencies.
 
 [Test](pipeline/tests.md): Executes all tests found.
