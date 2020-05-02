@@ -1,4 +1,4 @@
-FROM python:3.7-slim as requirements
+FROM python:3.8.2-slim as requirements
 
 COPY requirements.txt /app/requirements.txt
 
@@ -23,7 +23,7 @@ RUN mkdir /reports
 RUN pytest --junit-xml=/reports/unit.xml
 
 
-FROM python:3.7-slim as production
+FROM python:3.8.2-slim as production
 
 RUN useradd --create-home appuser
 
