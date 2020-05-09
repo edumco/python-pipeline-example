@@ -17,5 +17,8 @@ jobs:
   fast_finish: true
 
 script: 
-  - mkdir $HOME/reports
-  - pytest sample_python_project --pylama --junit-xml=$HOME/reports/unit.xml
+  - pytest sample_python_project --pylama
+  
+cache:
+  pip: true
+  
