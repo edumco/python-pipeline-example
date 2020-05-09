@@ -16,4 +16,5 @@ install:
 jobs:
   fast_finish: true
 
-script: cd sample_python_project && pytest
+script: 
+  - pytest sample_python_project --junit-xml=/reports/unit.xml
