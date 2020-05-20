@@ -12,12 +12,13 @@ python:
 install:
   - pip install -r sample_python_project/requirements.txt
   - pip install -r sample_python_project/requirements-test.txt
+  - pip check
 
 jobs:
   fast_finish: true
 
 script: 
-  - pytest sample_python_project --pylama
+  - pytest sample_python_project --pylama --junit-xml=unit.xml
   
 cache:
   pip: true
