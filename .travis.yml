@@ -17,9 +17,10 @@ install:
 jobs:
   fast_finish: true
 
-script: 
-  - pytest sample_python_project --pylama --junit-xml=unit.xml
-  
+script:
+  - pytest sample_python_project --junit-xml=unit.xml
+  - pylama --verbose .
+
 cache:
   pip: true
   apt: true

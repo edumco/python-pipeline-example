@@ -1,0 +1,10 @@
+# Files that should be ignored
+
+# python virtual env
+.venv
+
+# Python Cache
+*.pyc
+
+# Test Report
+*.xml
