@@ -19,7 +19,7 @@ jobs:
 
 script:
   - pytest sample_python_project --junit-xml=unit.xml
-  - pylama --verbose .
+  - pylama --verbose sample_python_project
 
 cache:
   pip: true
