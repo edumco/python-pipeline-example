@@ -7,20 +7,16 @@ RUN pip install -r /app/requirements.txt
 
 FROM requirements as code
 
-COPY src /app
-
-WORKDIR /app
+COPY . /app
 
 
 FROM code as test
 
-COPY requirements-test.txt /app/requirements-test.txt
+COPY requirements-test.txt /tmp/requirements-test.txt
 
-RUN  pip install -r /app/requirements-test.txt
+RUN  pip install -r /tmp/requirements-test.txt
 
-RUN mkdir /reports
-
-RUN pytest --junit-xml=/reports/unit.xml
+RUN pytest /app --junit-xml=unit.xml
 
 
 FROM python:3.8.3-slim as production
