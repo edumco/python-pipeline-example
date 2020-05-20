@@ -21,17 +21,17 @@ You can put several stages to your pipeline, but the most common stages are:
 | ----- | ---- | ---- | -------- | ------ | --- |
 | Build | Test | Lint | Analisys | Report | Tag |
 
-[Build](pipeline/dependencies.md): Downloads and build dependencies.
+[Build](docs/dependencies.md): Downloads and build dependencies.
 
-[Test](pipeline/tests.md): Executes all tests found.
+[Test](docs/tests.md): Executes all tests found.
 
-[Lint](pipeline/lint.md): Checks code style and format.
+[Lint](docs/lint.md): Checks code style and format.
 
-[Analisys](pipeline/static-analisys.md): Checks for bad code practicies.
+[Analisys](docs/static-analisys.md): Checks for bad code practicies.
 
-[Report](pipeline/reports.md): Exports the results to archiving.
+[Report](docs/reports.md): Exports the results to archiving.
 
-[Tag](pipeline/tagging.md): Adds a unique identifier to the version.
+[Tag](docs/tagging.md): Adds a unique identifier to the version.
 
 ## Installation
 
@@ -41,7 +41,7 @@ You can put several stages to your pipeline, but the most common stages are:
 
 3. Make sure the `Dockerfile` is on project root folder.
 
-4. Update the requiments with your dependencies or create your list of requirements. [See the dependencies tutorial to more details.](pipeline/dependencies.md)
+4. Update the requiments with your dependencies or create your list of requirements. [See the dependencies tutorial to more details.](docs/dependencies.md)
 
 5. Make sure the name patterns on `pytest.ini`
 
