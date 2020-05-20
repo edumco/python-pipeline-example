@@ -1,7 +1,7 @@
-# Pylama dependency tree for pylama pylama-7.7.1 
-mccabe==0.6.1 
-pycodestyle==2.6.0 
-pydocstyle==5.0.2 
-pyflakes==2.2.0 
-pylama==7.7.1 
-snowballstemmer==2.0.0
+# Forces the use of a exact version
+# This makes the build more reproducible
+# When a new version is released the dependabot makes a PR
+
+pip==20.1.1
+setuptools==46.4.0
+wheel==0.34.2
