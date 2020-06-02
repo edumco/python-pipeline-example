@@ -12,7 +12,7 @@ COPY . /app
 
 FROM code as test
 
-COPY requirements-test.txt /tmp/requirements-test.txt
+COPY tests/requirements-test.txt /tmp/requirements-test.txt
 
 RUN  pip install -r /tmp/requirements-test.txt
 
