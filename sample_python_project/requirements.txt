@@ -1,7 +1,0 @@
-# Forces the use of a exact version
-# This makes the build more reproducible
-# When a new version is released the dependabot makes a PR
-
-pip==20.1.1
-setuptools==47.1.1
-wheel==0.34.2
