@@ -1,4 +1,4 @@
-# Python Pipeline Example 🐍
+# Python Pipeline 🐍
 
 Simple Docker pipeline to test your python code.
 
