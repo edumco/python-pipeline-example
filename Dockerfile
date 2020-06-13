@@ -1,32 +1,25 @@
-FROM python:3.8.3-slim as requirements
+FROM python:3.8-alpine as requirements
+
+WORKDIR /app
 
 COPY requirements.txt /app/requirements.txt
 
-RUN pip install -r /app/requirements.txt
+RUN pip install --compile --requirement requirements.txt && pip check
+
+COPY . .
 
 
-FROM requirements as code
 
-COPY . /app
+FROM requirements as test
 
+RUN pip install --compile --requirement tests/requirements.txt && pip check
 
-FROM code as test
-
-COPY tests/requirements-test.txt /tmp/requirements-test.txt
-
-RUN  pip install -r /tmp/requirements-test.txt
-
-RUN pytest /app --junit-xml=unit.xml
+RUN pytest .
 
 
-FROM python:3.8.3-slim as production
 
-RUN useradd --create-home appuser
-
-USER appuser
+FROM python:3.8-alpine as production
 
 COPY --from=requirements /usr/local /usr/local
 
-COPY --from=code /app /home/appuser/app
-
-WORKDIR /home/appuser/app
+COPY --from=requirements /app /app
