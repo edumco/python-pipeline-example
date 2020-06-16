@@ -2,7 +2,7 @@
 
 # Pytest dependency tree for pytest==5.4.3
     attrs==19.3.0
-    more-itertools==8.3.0
+    more-itertools==8.4.0
     packaging==20.4
     pluggy==0.13.1
     py==1.8.2
