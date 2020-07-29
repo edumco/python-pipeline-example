@@ -1,20 +1,24 @@
 FROM python:3.8-alpine as requirements
 
-WORKDIR /app
-
 COPY requirements.txt /app/requirements.txt
 
-RUN pip install --compile --requirement requirements.txt && pip check
-
-COPY . .
-
+RUN pip install --compile --requirement /app/requirements.txt && pip check
 
 
 FROM requirements as test
 
-RUN pip install --compile --requirement tests/requirements.txt && pip check
+COPY tests/requirements.txt /app/tests/requirements.txt
 
-RUN pytest .
+RUN pip install --compile --requirement /app/tests/requirements.txt && pip check
+
+COPY . /app
+
+WORKDIR /app 
+
+RUN pytest -n 4
+
+RUN pylama --verbose --linters pydocstyle,pycodestyle,pyflakes,pylint tests/
+
 
 
 
