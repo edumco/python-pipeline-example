@@ -15,10 +15,11 @@ COPY . /app
 
 WORKDIR /app 
 
+RUN python -m bandit --skip B101 -r tests
+
 RUN pytest -n 4
 
 RUN pylama --verbose --linters pydocstyle,pycodestyle,pyflakes,pylint tests/
-
 
 
 
