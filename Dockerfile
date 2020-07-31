@@ -1,30 +1,35 @@
 FROM python:3.8-alpine as requirements
 
-COPY requirements.txt /app/requirements.txt
+WORKDIR /app 
 
-RUN pip install --compile --requirement /app/requirements.txt && pip check
+COPY requirements.txt requirements.txt
+
+RUN pip install -r requirements.txt && pip check
+
+COPY tests/requirements.txt tests/requirements.txt
 
 
-FROM requirements as test
 
-COPY tests/requirements.txt /app/tests/requirements.txt
+FROM requirements as tests
 
-RUN pip install --compile --requirement /app/tests/requirements.txt && pip check
+RUN pip install -r tests/requirements.txt && pip check
 
 COPY . /app
-
-WORKDIR /app 
 
 RUN python -m bandit --skip B101 -r tests
 
 RUN pytest -n 4
 
-RUN pylama --verbose --linters pydocstyle,pycodestyle,pyflakes,pylint tests/
+RUN pylama --verbose --linters pydocstyle,pycodestyle,pyflakes tests/
 
 
 
-FROM python:3.8-alpine as production
+FROM requirements as production
 
-COPY --from=requirements /usr/local /usr/local
+# Copy only the modules from the source
 
-COPY --from=requirements /app /app
+COPY module /module
+
+WORKDIR /module
+
+ENTRYPOINT [ "python", "main.py" ]
