@@ -1,7 +1,7 @@
 # Dependency trees generated on python:3.8.3-debian-sim
 
 # Pytest
-    attrs==19.3.0
+    attrs==20.2.0
     more-itertools==8.5.0
     packaging==20.4
     pluggy==0.13.1
