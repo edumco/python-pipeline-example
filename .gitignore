@@ -1,10 +1,14 @@
 # Files that should be ignored
 
 # python virtual env
-.venv
+env
 
 # Python Cache
 *.pyc
+*_cache
 
 # Test Report
 *.xml
+
+# VSCode files
+.vscode

@@ -1,0 +1,7 @@
+*github/
+docs
+LICENSE
+README.md
+env
+.pytest_cache/
+**pycache__/
