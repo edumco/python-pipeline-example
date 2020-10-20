@@ -29,5 +29,5 @@ pytest-xdist==2.1.0
       smmap==3.0.4
   PyYAML==5.3.1
   stevedore==3.2.2
-    pbr==5.5.0
+    pbr==5.5.1
 bandit==1.6.2
