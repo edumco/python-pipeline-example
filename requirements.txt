@@ -2,6 +2,6 @@
 # This makes the build more reproducible
 # When a new version is released the dependabot makes a PR
 
-pip==20.2.4
+pip==20.3.1
 setuptools==50.3.2
 wheel==0.35.1
