@@ -9,7 +9,7 @@
     pyparsing==2.4.7
     six==1.15.0
     wcwidth==0.2.5
-pytest==6.2.1
+pytest==6.2.2
 
 # Pylama
     pycodestyle==2.6.0
