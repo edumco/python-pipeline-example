@@ -1,4 +1,4 @@
-FROM python:3.9.1-alpine as requirements
+FROM python:3.9.2-alpine as requirements
 
 WORKDIR /app 
 
