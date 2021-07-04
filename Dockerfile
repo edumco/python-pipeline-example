@@ -1,6 +1,6 @@
 FROM python:3.9.5-alpine3.12 as requirements
 
-RUN adduser nonroot
+RUN adduser -D nonroot
 
 USER nonroot
 
