@@ -1,5 +1,7 @@
 FROM python:3.9.5-alpine3.12 as requirements
 
+USER nonroot
+
 WORKDIR /app 
 
 COPY requirements.txt requirements.txt
